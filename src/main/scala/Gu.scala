@@ -23,10 +23,10 @@ object  Gu {
   }
   val app = new JFXApp {
 
-    val matchId=randomMatchId()  //Losowanie interesującego nas meczu
-    val json:JValue=connectionMatch(matchId) //Bierze jsonStringa z http://developer.riotgames.com/ i konwertuje do JValue
-    val championList = getChampionsList(json)
-    val realWinner=winner(json)
+    var matchId=randomMatchId()  //Losowanie interesującego nas meczu
+    var json:JValue=connectionMatch(matchId) //Bierze jsonStringa z http://developer.riotgames.com/ i konwertuje do JValue
+    var championList = getChampionsList(json)
+    var realWinner=winner(json)
    championList.foreach( u => println(u.image +"    "+ u.name))
     stage = new JFXApp.PrimaryStage {
       title.value = "LoL"
@@ -36,13 +36,27 @@ object  Gu {
         fill = Color.rgb(22,2,63)
 
 
+        val pointsL = new Label("Points: "+points)
+        pointsL.setFont(new Font("TimesRoman", 31))
+        pointsL.setTextFill(Color.RED)
+        pointsL.layoutX = 600
+        pointsL.layoutY =530
 
         val buttonRed = new Button("Blue Team WIN !")
         buttonRed.layoutX = 150
         buttonRed.layoutY =610
         buttonRed.setTextFill(Color.BLUE)
-        buttonRed.onAction = (e: ActionEvent) => {win_check(
-          realWinner,"Blue")
+        buttonRed.onAction = (e: ActionEvent) => {
+          disable(false)
+          win_check(realWinner,"Blue")
+          pointsL.text = "Points: "+points
+           matchId=randomMatchId()  //Losowanie interesującego nas meczu
+          var json: JValue =connectionMatch(matchId) //Bierze jsonStringa z http://developer.riotgames.com/ i konwertuje do JValue
+           championList = getChampionsList(json)
+           realWinner=winner(json)
+          championList.foreach( u => println(u.image +"    "+ u.name))
+          disable(true)
+          refresh()
 
         }
 
@@ -51,7 +65,17 @@ object  Gu {
         buttonBlue.layoutY =610
         buttonBlue.setTextFill(Color.PURPLE)
         buttonBlue.onAction = (e: ActionEvent) => {
+          disable(false)
           win_check(realWinner,"Purple")
+          pointsL.text = "Points: "+points
+          matchId=randomMatchId()  //Losowanie interesującego nas meczu
+          var json: JValue =connectionMatch(matchId) //Bierze jsonStringa z http://developer.riotgames.com/ i konwertuje do JValue
+          championList = getChampionsList(json)
+          realWinner=winner(json)
+          championList.foreach( u => println(u.image +"    "+ u.name))
+          disable(true)
+          refresh()
+
           }
 
         val redT = new Label("Blue Team")
@@ -71,6 +95,14 @@ object  Gu {
         ver.setFitWidth(100)
         ver.layoutX = 250
         ver.layoutY = 300
+
+        val loading = new ImageView(new Image("http://www.lettersmarket.com/uploads/lettersmarket/blog/loaders/common_gray/ajax_loader_gray_512.gif"))
+        loading.setFitHeight(200)
+        loading.setFitWidth(200)
+        loading.layoutX = 250
+        loading.layoutY = 300
+        loading.visible = false;
+
 
 
 
@@ -195,8 +227,75 @@ object  Gu {
         blue5.layoutX = 350
         blue5.layoutY = 500
 
+        private def refresh(){
 
-        content = List(buttonBlue,buttonRed,blueT,redT,ver,red1,red2,red3,red4,red5,blue1,blue2,blue3,blue4,blue5,red1L,red2L,red3L,red4L,red5L,blue1L,blue2L,blue3L,blue4L,blue5L)
+          red1.image = new Image(championList(0).image)
+          red2.image = new Image(championList(1).image)
+          red3.image = new Image(championList(2).image)
+          red4.image = new Image(championList(3).image)
+          red5.image = new Image(championList(4).image)
+
+          blue1.image = new Image(championList(5).image)
+          blue2.image = new Image(championList(6).image)
+          blue3.image = new Image(championList(7).image)
+          blue4.image = new Image(championList(8).image)
+          blue5.image = new Image(championList(9).image)
+
+
+          red1L.text = championList(0).name
+          red2L.text = championList(1).name
+          red3L.text = championList(2).name
+          red4L.text = championList(3).name
+          red5L.text = championList(4).name
+
+          blue1L.text = championList(5).name
+          blue2L.text = championList(6).name
+          blue3L.text = championList(7).name
+          blue4L.text = championList(8).name
+          blue5L.text = championList(9).name
+
+        }
+        private def disable(value:Boolean){
+
+            if(value == true){
+              loading.visible = false;
+
+            }else{
+
+              loading.visible = true;
+            }
+
+          red1.visible = value;
+          red2.visible = value;
+          red3.visible = value;
+          red4.visible = value;
+          red5.visible = value;
+
+          blue1.visible = value;
+          blue2.visible = value;
+          blue3.visible = value;
+          blue4.visible = value;
+          blue5.visible = value;
+
+
+          red1L.visible = value;
+          red2L.visible = value;
+          red3L.visible = value;
+          red4L.visible = value;
+          red5L.visible = value;
+
+          blue1L.visible = value;
+          blue2L.visible = value;
+          blue3L.visible = value;
+          blue4L.visible = value;
+          blue5L.visible = value;
+          buttonBlue.visible = value;
+          buttonRed.visible = value;
+          ver.visible = value;
+        }
+
+
+        content = List(loading,pointsL,buttonBlue,buttonRed,blueT,redT,ver,red1,red2,red3,red4,red5,blue1,blue2,blue3,blue4,blue5,red1L,red2L,red3L,red4L,red5L,blue1L,blue2L,blue3L,blue4L,blue5L)
       }
 
     }
@@ -273,7 +372,7 @@ object  Gu {
         contentText = ":)"
       }.showAndWait()
     }else{
-      points += 100;
+      points -= 100;
     new Alert(AlertType.Information) {
       title = "You LOST !"
       headerText = "- 100 points"
