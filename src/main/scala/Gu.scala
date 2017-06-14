@@ -1,6 +1,7 @@
 import javafx.scene.paint.Color
 import javafx.scene.text.Font
 
+import scalafx.event.ActionEvent
 import org.json4s.JValue
 import org.json4s.jackson.JsonMethods.parse
 
@@ -9,11 +10,13 @@ import scala.util.Random
 import scalafx.Includes._
 import scalafx.application.JFXApp
 import scalafx.scene.Scene
-import scalafx.scene.control.Label
+import scalafx.scene.control.Alert.AlertType
+import scalafx.scene.control.{Alert, Button, Label}
 import scalafx.scene.image.{Image, ImageView}
 
 
 object  Gu {
+  var points =0;
   def main(args: Array[String]): Unit = {
     println("LOL!")
     app.main(args)
@@ -23,7 +26,7 @@ object  Gu {
     val matchId=randomMatchId()  //Losowanie interesującego nas meczu
     val json:JValue=connectionMatch(matchId) //Bierze jsonStringa z http://developer.riotgames.com/ i konwertuje do JValue
     val championList = getChampionsList(json)
-
+    val realWinner=winner(json)
    championList.foreach( u => println(u.image +"    "+ u.name))
     stage = new JFXApp.PrimaryStage {
       title.value = "LoL"
@@ -31,6 +34,37 @@ object  Gu {
       height = 700
       scene = new Scene {
         fill = Color.rgb(22,2,63)
+
+
+
+        val buttonRed = new Button("Blue Team WIN !")
+        buttonRed.layoutX = 150
+        buttonRed.layoutY =610
+        buttonRed.setTextFill(Color.BLUE)
+        buttonRed.onAction = (e: ActionEvent) => {win_check(
+          realWinner,"Blue")
+
+        }
+
+        val buttonBlue = new Button("Purple Team WIN !")
+        buttonBlue.layoutX = 350
+        buttonBlue.layoutY =610
+        buttonBlue.setTextFill(Color.PURPLE)
+        buttonBlue.onAction = (e: ActionEvent) => {
+          win_check(realWinner,"Purple")
+          }
+
+        val redT = new Label("Blue Team")
+        redT.setFont(new Font("TimesRoman", 34))
+        redT.setTextFill(Color.BLUE)
+        redT.layoutX = 100
+        redT.layoutY =50
+
+        val blueT = new Label("Purple Team")
+        blueT.setFont(new Font("TimesRoman", 34))
+        blueT.setTextFill(Color.PURPLE)
+        blueT.layoutX = 300
+        blueT.layoutY =50
 
         val ver = new ImageView(new Image("https://static.comicvine.com/uploads/original/11111/111119495/3299555-kickass12.png"))
         ver.setFitHeight(100)
@@ -162,7 +196,7 @@ object  Gu {
         blue5.layoutY = 500
 
 
-        content = List(ver,red1,red2,red3,red4,red5,blue1,blue2,blue3,blue4,blue5,red1L,red2L,red3L,red4L,red5L,blue1L,blue2L,blue3L,blue4L,blue5L)
+        content = List(buttonBlue,buttonRed,blueT,redT,ver,red1,red2,red3,red4,red5,blue1,blue2,blue3,blue4,blue5,red1L,red2L,red3L,red4L,red5L,blue1L,blue2L,blue3L,blue4L,blue5L)
       }
 
     }
@@ -226,6 +260,28 @@ object  Gu {
     val  connectionString = "https://eun1.api.riotgames.com/lol/match/v3/matches/"+matchId+"?api_key=bc394c90-2ab4-40a1-9ea7-72ab90670e03"
     connectionString
   }
+
+  private def  win_check (win : String ,who:String): Unit ={
+
+    if(win.equals(who)){
+
+      points += 100;
+
+      new Alert(AlertType.Information) {
+        title = "You WON !"
+        headerText = "+ 100 points"
+        contentText = ":)"
+      }.showAndWait()
+    }else{
+      points += 100;
+    new Alert(AlertType.Information) {
+      title = "You LOST !"
+      headerText = "- 100 points"
+      contentText = ":("
+    }.showAndWait()}
+  }
+
+
 
   private def championsIds(gameId:Long):List[Int] = {
     val json:JValue=connectionMatch(gameId)
