@@ -61,7 +61,7 @@ object Connection extends App{
     return json
   }
 
-  private def championsIds(json:JValue):List[Int] = {
+   def championsIds(json:JValue):List[Int] = {
     val players = json \ "participants"
     val champIds=players \ "championId"
     var myList: List[Int] = List()
@@ -72,7 +72,7 @@ object Connection extends App{
     return myList
   }
 
-  private def winner(json:JValue): String ={
+   def winner(json:JValue): String ={
     val teams=json \\ "teams"
     val winnerLoser=teams \ "win"
     if(winnerLoser(0).values.equals("Win"))
@@ -80,18 +80,18 @@ object Connection extends App{
       return "Purple"
   }
 
-  private def createConnectionString:String={
+   def createConnectionString:String={
     val matchId=randomMatchId()
     val  connectionString = "https://eun1.api.riotgames.com/lol/match/v3/matches/"+matchId+"?api_key=bc394c90-2ab4-40a1-9ea7-72ab90670e03"
     connectionString
   }
 
-  private def championsIds(gameId:Long):List[Int] = {
+   def championsIds(gameId:Long):List[Int] = {
     val json:JValue=connectionMatch(gameId)
     championsIds(json)
   }
 
-  private def randomMatchId(baseMatchId:Int=1715640189,variance:Int=10000) = {
+  def randomMatchId(baseMatchId:Int=1715640189,variance:Int=10000) = {
     var x: Random = new Random()
     val matchId = 1715640189 - x.nextInt(variance)
     matchId
