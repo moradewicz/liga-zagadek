@@ -4,7 +4,7 @@ Opis apki
 ## Getting Started
 You can run app from the sbt console with (Folder: \src\main\scala):
 ```
-scalac HelloWorld.scala
+scalac GUI.scala
 ```
 
 ## Running the tests
