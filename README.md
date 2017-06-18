@@ -9,25 +9,15 @@
 
 A step by step series of examples that tell you have to get a development env running
 
-Say what the step will be
-
-```
-Give the example
-```
-
-And repeat
-
-```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo
 
 ## Running the tests
 
 Test are in folder src/test/scala. You can run all of them from the sbt console with:
 
+```
 > test 
+```
+
 
 ## Built With
 
