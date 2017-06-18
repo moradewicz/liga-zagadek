@@ -1,5 +1,5 @@
-# Liga Zagadek
-Opis apki
+# League of Puzzles 
+League of Puzzles is an application where you can test your intuition of choosing the best characters in League Of Legends. Try to get as many points as possible!
 
 ## Getting Started
 You can run app from the sbt console with (Folder: \src\main\scala):
@@ -26,6 +26,7 @@ Michał Lis
 
 Bartosz Moradewicz
 
+Sebastian Andrzejczak
 ## License
 
 This project is licensed under the MIT License 
