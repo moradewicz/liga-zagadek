@@ -72,7 +72,7 @@ object ChampionMap {
     24 -> "Jax",
     102 -> "Shyvana",
     429 -> "Kalista",
-    36 -> "Dr. Mundo",
+    36 -> "Dr Mundo",
     427 -> "Ivern",
     131 -> "Diana",
     223 -> "Tahm Kench",

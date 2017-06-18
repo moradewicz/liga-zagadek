@@ -3,22 +3,12 @@
   */
 
 //import connection.{answer, connectionString, json}
-
-import java.util.NoSuchElementException
-
-import connection.{championList, json}
-
-import scala.io.Source
-import org.json4s._
-import org.json4s.jackson.JsonMethods._
-object connection extends App{
+object Connection extends App{
   import org.json4s._
-  import org.json4s.JsonDSL._
   import org.json4s.jackson.JsonMethods._
-  import org.json4s.native.Serialization
-  import org.json4s.scalap.{Failure, Success}
-  import scala.util.Random
+
   import scala.io.Source
+  import scala.util.Random
 
 
   //val lastMatchId=1715640189 // Id na sucho wpisane pewnej gry która na pewno istniała
