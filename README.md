@@ -17,7 +17,7 @@ Test are in folder src/test/scala. You can run all of them from the sbt console 
 
 * [ScalaFX](http://www.scalafx.org/) - UI DSL written within the Scala Language
 * [Json4s](http://json4s.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
+* [ScalaTest](http://www.scalatest.org) -  Testing tool
 
 ## Authors
 
