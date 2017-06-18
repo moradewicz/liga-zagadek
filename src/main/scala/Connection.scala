@@ -38,14 +38,14 @@ object Connection extends App{
     println("Zgadnij zwycięzcę!")
   }
 
-  private def getChampionsList(json:JValue):List[Champion] = {
+   def getChampionsList(json:JValue):List[Champion] = {
     val championIdList: List[Int] = championsIds(json)
     var championList: List[Champion] = List()
     championIdList.foreach(x => championList = championList.::(new Champion(x)))
     return championList
   }
 
-  private def connectionMatch(matchId:Long): JValue ={
+   def connectionMatch(matchId:Long): JValue ={
     var connectionString = createConnectionString
     var answer="status"
     do {
