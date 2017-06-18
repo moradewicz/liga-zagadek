@@ -1,14 +1,8 @@
 # Liga Zagadek
-
-
+Opis apki
 
 ## Getting Started
-
-
-### Installing
-
-A step by step series of examples that tell you have to get a development env running
-
+jak walczyc
 
 ## Running the tests
 
