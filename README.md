@@ -21,7 +21,9 @@ Test are in folder src/test/scala. You can run all of them from the sbt console 
 
 ## Authors
 Emil Korpalski
+
 Michał Lis
+
 Bartosz Moradewicz
 
 ## License
