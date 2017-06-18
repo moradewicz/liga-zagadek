@@ -20,7 +20,9 @@ Test are in folder src/test/scala. You can run all of them from the sbt console 
 * [ScalaTest](http://www.scalatest.org) -  Testing tool
 
 ## Authors
-
+Emil Korpalski
+Michał Lis
+Bartosz Moradewicz
 
 ## License
 
