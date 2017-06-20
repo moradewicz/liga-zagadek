@@ -29,20 +29,15 @@ object GUI {
     var json: JValue = connectionMatch(matchId) //Bierze jsonStringa z http://developer.riotgames.com/ i konwertuje do JValue
     var championList = getChampionsList(json)
     var realWinner = winner(json)
-    championList.foreach(u => println(u.image + "    " + u.name))
     stage = new JFXApp.PrimaryStage {
       title.value = "LoL"
       width = 800
       height = 700
       scene = new Scene {
         fill = Color.rgb(22, 2, 63)
+        var guiF = new GuiFun
 
-
-        val pointsL = new Label("Points: " + points)
-        pointsL.setFont(new Font("TimesRoman", 31))
-        pointsL.setTextFill(Color.RED)
-        pointsL.layoutX = 600
-        pointsL.layoutY = 530
+        val pointsL:Label =  guiF.label("Points: " + points,31,Color.RED,600,530)
 
         val goodL = new Label("GOOD: " + good)
         goodL.setFont(new Font("TimesRoman", 21))
@@ -56,10 +51,7 @@ object GUI {
         badL.layoutX = 600
         badL.layoutY = 470
 
-        val buttonRed = new Button("Blue Team WIN !")
-        buttonRed.layoutX = 150
-        buttonRed.layoutY = 610
-        buttonRed.setTextFill(Color.BLUE)
+        val buttonRed = guiF.button("Blue team WIN ! " ,Color.BLUE,150,610)
         buttonRed.onAction = (e: ActionEvent) => {
           disable(false)
           win_check(realWinner, "Blue")

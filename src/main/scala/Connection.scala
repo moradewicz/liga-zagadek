@@ -11,32 +11,9 @@ object Connection extends App{
   import scala.util.Random
 
 
-  //val lastMatchId=1715640189 // Id na sucho wpisane pewnej gry która na pewno istniała
-  val matchId=randomMatchId()  //Losowanie interesującego nas meczu
-  val json:JValue=connectionMatch(matchId) //Bierze jsonStringa z http://developer.riotgames.com/ i konwertuje do JValue
-  val championList = getChampionsList(json)
-  printGame(championList)
-  val realWinner=winner(json) //Patrzy który zespół wygrał
-  val guess = scala.io.StdIn.readLine() // zespół który obstawia użytkownik
-  println(s"Zwycięzcą jest "+realWinner)
-  if(guess.equalsIgnoreCase(realWinner))
-    println("Zgadłeś!")
-  else
-  println("Niestety nie zgadłeś")
-  print("koniec")
 
 
-  def printGame(championList: List[Champion]) =   {
-    for(i<-0 to 9) {
-    if (i == 0)
-      println("-------BLUE---------")
-    if (i == 5)
-      println("-------PURPLE---------")
-    println(championList(i).name)
-  }
-    println("_______________")
-    println("Zgadnij zwycięzcę!")
-  }
+
 
    def getChampionsList(json:JValue):List[Champion] = {
     val championIdList: List[Int] = championsIds(json)

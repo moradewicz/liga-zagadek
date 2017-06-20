@@ -2,7 +2,7 @@
   * Created by HP on 2017-06-18.
   */
 
-import Connection.{connectionMatch, getChampionsList, randomMatchId}
+import Connection.{championsIds, connectionMatch, getChampionsList, randomMatchId}
 import org.json4s.JsonAST.JValue
 import org.scalatest._
 
@@ -27,6 +27,18 @@ class Test extends FunSuite {
     val championList = getChampionsList(json)
 
     assert(championList != null)
+  }
+
+
+  test("Champion not exsit") {
+    val matchId=randomMatchId()  //Losowanie interesującego nas meczu
+    val json:JValue=connectionMatch(matchId) //Bierze jsonStringa z http://developer.riotgames.com/ i konwertuje do JValue
+    val cha =   ChampionMap
+    val championIdList: List[Int] = championsIds(json)
+    var championList: List[Champion] = List()
+    championIdList.foreach(x =>  assert(cha.mapa.exists(_._1 == x)))
+
+
   }
 
 
