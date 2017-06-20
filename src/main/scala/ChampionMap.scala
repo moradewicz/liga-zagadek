@@ -130,7 +130,7 @@ object ChampionMap {
     41 -> "Gangplank",
     48 -> "Trundle",
     38 -> "Kassadin",
-    161 -> "Vel'Koz",
+    161 -> "Vel'koz",
     143 -> "Zyra",
     267 -> "Nami",
     59 -> "Jarvan IV",
