@@ -12,9 +12,6 @@ object Connection extends App{
 
 
 
-
-
-
    def getChampionsList(json:JValue):List[Champion] = {
     val championIdList: List[Int] = championsIds(json)
     var championList: List[Champion] = List()

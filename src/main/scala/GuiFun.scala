@@ -14,7 +14,7 @@ class GuiFun {
     l.setTextFill(color)
     l.layoutX = x
     l.layoutY = y
-return l
+    l
   }
 
   def button(a:String, color: Color,x :Int, y:Int ):Button={
@@ -22,7 +22,7 @@ return l
     b.setTextFill(color)
     b.layoutX = x
     b.layoutY = y
-    return b
+    b
   }
 
 }
